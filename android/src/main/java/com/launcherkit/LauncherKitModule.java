@@ -63,7 +63,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
   private class AppDetail {
     CharSequence label;
     CharSequence packageName;
-    String versionName;
+    CharSequence versionName;
     Drawable icon;
     public String toString() {
       Bitmap icon;
@@ -106,7 +106,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
 
   }
 
-  private String getVersionName(String packageName) {
+  private CharSequence getVersionName(String packageName) {
     try {
       PackageInfo packageInfo = this.reactContext.getPackageManager().getPackageInfo(packageName, 0);
       return packageInfo.versionName;
