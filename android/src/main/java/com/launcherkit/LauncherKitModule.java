@@ -63,7 +63,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
   private class AppDetail {
     CharSequence label;
     CharSequence packageName;
-    CharSequence versionName;
+    String versionName;
     Drawable icon;
     public String toString() {
       Bitmap icon;
