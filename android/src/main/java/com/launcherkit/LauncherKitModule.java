@@ -86,7 +86,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  private String getApps(){
+  private String getApps() {
     List<AppDetail> apps = new ArrayList<>();
     PackageManager pManager = this.reactContext.getPackageManager();
 
@@ -97,13 +97,23 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
       AppDetail app = new AppDetail();
       app.label = ri.loadLabel(pManager);
       app.packageName = ri.activityInfo.packageName;
-      app.versionName = ri.activityInfo.versionName;
+      app.versionName = getVersionName(app.packageName);
       app.icon = ri.activityInfo.loadIcon(this.reactContext.getPackageManager());
       apps.add(app);
 
     }
     return apps.toString();
 
+  }
+
+  private String getVersionName(String packageName) {
+    try {
+      PackageInfo packageInfo = this.reactContext.getPackageManager().getPackageInfo(packageName, 0);
+      return packageInfo.versionName;
+    } catch (PackageManager.NameNotFoundException e) {
+      e.printStackTrace();
+      return "N/A";
+    }
   }
 
   private List<String> getAllApps() {
