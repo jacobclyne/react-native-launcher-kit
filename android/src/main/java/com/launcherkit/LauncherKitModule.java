@@ -63,6 +63,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
   private class AppDetail {
     CharSequence label;
     CharSequence packageName;
+    CharSequence versionName;
     Drawable icon;
     public String toString() {
       Bitmap icon;
@@ -80,7 +81,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
       byte[] byteArray = byteArrayOutputStream.toByteArray();
       String encoded = Base64.encodeToString(byteArray, Base64.NO_WRAP);
 
-      return "{\"label\":\"" + this.label + "\",\"packageName\":\"" + this.packageName + "\",\"icon\":\"" + encoded + "\"}";
+      return "{\"label\":\"" + this.label + "\",\"packageName\":\"" + this.packageName + "\",\"versionName\":\"" + this.versionName + "\",\"icon\":\"" + encoded + "\"}";
     }
   }
 
@@ -96,6 +97,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
       AppDetail app = new AppDetail();
       app.label = ri.loadLabel(pManager);
       app.packageName = ri.activityInfo.packageName;
+      app.versionName = ri.activityInfo.versionName;
       app.icon = ri.activityInfo.loadIcon(this.reactContext.getPackageManager());
       apps.add(app);
 
