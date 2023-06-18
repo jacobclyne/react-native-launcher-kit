@@ -106,7 +106,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
 
   }
 
-  private CharSequence getVersionName(String packageName) {
+  private CharSequence getVersionName(CharSequence packageName) {
     try {
       PackageInfo packageInfo = this.reactContext.getPackageManager().getPackageInfo(packageName, 0);
       return packageInfo.versionName;
