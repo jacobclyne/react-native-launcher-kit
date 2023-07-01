@@ -155,10 +155,10 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
   public void isPackageInstalled(String packageName, Callback cb) {
     PackageManager pm = this.reactContext.getPackageManager();
     try {
-      pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-      cb.invoke(true);
+      PackageInfo packageInfo = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+      cb.invoke(packageInfo.versionName);
     } catch (Exception e) {
-      cb.invoke(false);
+      cb.invoke('');
     }
   }
 

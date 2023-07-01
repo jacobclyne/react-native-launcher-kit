@@ -51,10 +51,10 @@ const LauncherKitHelper: LauncherKitHelperProps = {
    * @param bundleId The bundle ID of the app to check for.
    * @returns A `Promise` that resolves to `true` if the app is installed, `false` otherwise.
    */
-  checkIfPackageInstalled: (bundleId: string): Promise<boolean> =>
+  checkIfPackageInstalled: (bundleId: string): Promise<string> =>
     new Promise((resolve) => {
-      LauncherKit.isPackageInstalled(bundleId, (installed: boolean) => {
-        resolve(installed);
+      LauncherKit.isPackageInstalled(bundleId, (versionName: string) => {
+        resolve(versionName);
       });
     }),
   /**
