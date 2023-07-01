@@ -85,7 +85,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  private String getApps() {
+  private String getApps(){
     List<AppDetail> apps = new ArrayList<>();
     PackageManager pManager = this.reactContext.getPackageManager();
 
