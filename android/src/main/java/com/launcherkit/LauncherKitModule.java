@@ -89,6 +89,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
   private String getApps() {
     List<AppDetail> apps = new ArrayList<>();
     PackageManager pManager = this.reactContext.getPackageManager();
+    pManager.getInstalledApplications(PackageManager.MATCH_UNINSTALLED_PACKAGES);
 
     Intent i = new Intent(Intent.ACTION_MAIN, null);
     i.addCategory(Intent.CATEGORY_LAUNCHER);
