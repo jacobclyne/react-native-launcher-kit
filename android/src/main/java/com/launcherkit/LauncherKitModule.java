@@ -145,7 +145,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
       PackageInfo packageInfo = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
       cb.invoke(packageInfo.versionName);
     } catch (Exception e) {
-      cb.invoke('');
+      cb.invoke("");
     }
   }
 
