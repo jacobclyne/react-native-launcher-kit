@@ -63,7 +63,6 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
   private class AppDetail {
     CharSequence label;
     CharSequence packageName;
-    CharSequence versionName;
     Drawable icon;
     public String toString() {
       Bitmap icon;
@@ -81,7 +80,7 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
       byte[] byteArray = byteArrayOutputStream.toByteArray();
       String encoded = Base64.encodeToString(byteArray, Base64.NO_WRAP);
 
-      return "{\"label\":\"" + this.label + "\",\"packageName\":\"" + this.packageName + "\",\"versionName\":\"" + this.versionName + "\",\"icon\":\"" + encoded + "\"}";
+      return "{\"label\":\"" + this.label + "\",\"packageName\":\"" + this.packageName + "\",\"icon\":\"" + encoded + "\"}";
     }
   }
 
@@ -89,7 +88,6 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
   private String getApps() {
     List<AppDetail> apps = new ArrayList<>();
     PackageManager pManager = this.reactContext.getPackageManager();
-    pManager.getInstalledApplications(PackageManager.MATCH_UNINSTALLED_PACKAGES);
 
     Intent i = new Intent(Intent.ACTION_MAIN, null);
     i.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -98,23 +96,12 @@ public class LauncherKitModule extends ReactContextBaseJavaModule {
       AppDetail app = new AppDetail();
       app.label = ri.loadLabel(pManager);
       app.packageName = ri.activityInfo.packageName;
-      app.versionName = getVersionName(app.packageName);
       app.icon = ri.activityInfo.loadIcon(this.reactContext.getPackageManager());
       apps.add(app);
 
     }
     return apps.toString();
 
-  }
-
-  private CharSequence getVersionName(CharSequence packageName) {
-    try {
-      PackageInfo packageInfo = this.reactContext.getPackageManager().getPackageInfo(String.valueOf(packageName), 0);
-      return packageInfo.versionName;
-    } catch (PackageManager.NameNotFoundException e) {
-      e.printStackTrace();
-      return "N/A";
-    }
   }
 
   private List<String> getAllApps() {
